@@ -3,6 +3,7 @@ package com.appliepi.android.appplepie;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -34,6 +35,7 @@ public class SendPost extends AsyncTask<Void, Void, String> {
 
     protected void onPostExecute(String result) {
         // 모두 작업을 마치고 실행할 일 (메소드 등등)
+        Log.d("Token", result);
         token = result;
     }
 
@@ -66,8 +68,10 @@ public class SendPost extends AsyncTask<Void, Void, String> {
         try {
             UrlEncodedFormEntity entity = new UrlEncodedFormEntity(post, "UTF-8");
             httpPost.setEntity(entity);
-            client.execute(httpPost);
-            return EntityUtils.getContentCharSet(entity);
+            HttpResponse response = client.execute(httpPost);
+            String json = EntityUtils.toString(response.getEntity());
+            Log.d("Token", json);
+            return json;
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
