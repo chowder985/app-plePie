@@ -1,16 +1,53 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="10dp"
+              android:layout_marginTop="67dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
              tools:context="com.appliepi.android.appplepie.MainFragment">
 
     <TextView
+        android:textStyle="bold"
+        android:id="@+id/intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceLarge"
-        android:text="MAIN"
+        android:text="Introduction"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         />
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/intro"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="App:plepie
+가족같은 분위기를 가진 대표적인 동아리이다. 동아리 이름 App:plepie 의 뜻은 Android의 첫 번쨰 버전의 이름 Applepie 와 모바일 앱 개발 동아리의 App 을 합쳐서 App:plepie 라는 이름이 탄생하였다. 동아리의 주 색깔은 빨간색이다."
+        android:textAppearance="?android:textAppearanceSmall"/>
 
-</RelativeLayout>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="모바일 앱 개발 동아리"/>
+
+    <TextView
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="학교기업 비즈쿨 동아리 선정\n
+2012년도 선린인터넷고등학교 우수동아리\n
+2013년도 선린인터넷고등학교 우수동아리\n
+2015년도 선린인터넷고등학교 우수동아리"/>
+
+
+</LinearLayout>

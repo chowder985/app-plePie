@@ -1,6 +1,7 @@
 package com.appliepi.android.appplepie;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity {
 
+    static SignupActivity sSignupActivity;
     private static final String TAG = "SignupActivity";
 
     EditText numberText;
@@ -25,6 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        sSignupActivity = this;
 
         numberText = (EditText) findViewById(R.id.input_number);
         nameText = (EditText) findViewById(R.id.input_name);
@@ -70,23 +73,25 @@ public class SignupActivity extends AppCompatActivity {
         String id = idText.getText().toString();
         String password = passwordText.getText().toString();
 
-
+        new SignupSendPost(number, name, id, password).execute();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
-                        onSignupSuccess();
                         // onSignupFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 2000);
     }
 
-    public void onSignupSuccess() {
+    public void onSignupSuccess(String token) {
         signupBtn.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Intent intent = new Intent();
+        intent.putExtra("TokenFromSignup", token);
+        Log.d(TAG, token);
+        setResult(RESULT_OK, intent);
         finish();
     }
 
@@ -97,7 +102,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public boolean validate() {
-        boolean valid = false;
+        boolean valid = true;
 
         String number = numberText.getText().toString();
         String name = nameText.getText().toString();
@@ -133,5 +138,9 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    public static SignupActivity getInstance(){
+        return sSignupActivity;
     }
 }

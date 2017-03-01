@@ -1,6 +1,5 @@
 package com.appliepi.android.appplepie;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -9,6 +8,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -25,52 +25,42 @@ import java.util.ArrayList;
  * Created by ilhoon on 27/02/2017.
  */
 
-public class SendPost extends AsyncTask<Object, Object, JSONObject> {
+public class GetUserInfoPost extends AsyncTask<Object, Object, JSONObject> {
 
-    private String username;
-    private String password;
-    private String token="Token";
-    private boolean loggined = false;
+    private String token;
+    private String navHeaderString;
+    private int id;
+    private int navHeaderType = 0;
 
-    public SendPost(String username, String password){
-        this.username = username;
-        this.password = password;
+    public GetUserInfoPost(String token){
+        this.token = token;
     }
 
-    protected void onPostExecute(JSONObject result) {
-        // 모두 작업을 마치고 실행할 일 (메소드 등등)
+    protected void onPostExecute(JSONObject result){ //사실상 get
         super.onPostExecute(result);
-        if(result != null){
-            if(result.has("token")){
-                try {
-                    token = result.getString("token");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                loggined = true;
-            }else{
-                loggined = false;
+        Log.d("result", result.toString());
+        if(result != null) {
+            try {
+                navHeaderString = result.getString("nick_name")+"님 안녕하세요";
+                id = result.getInt("application");
+                Log.d("GetUserInfo", navHeaderString);
+                if(result.getString("nick_name").equals("admin"))
+                    navHeaderType = 1;
+                MainActivity.getInstance().setNavigationView(navHeaderString, navHeaderType, id);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
-
-        Log.d("Token", token);
-
-        if (loggined)
-            LoginActivity.getInstance().onLoginSuccess(token);
-        else
-            LoginActivity.getInstance().onLoginFailed();
     }
 
     @Override
-    protected JSONObject doInBackground(Object... voids) {
+    protected JSONObject doInBackground(Object... objects) {
         JSONObject content = executeClient();
         return content;
     }
 
     public JSONObject executeClient() {
         ArrayList<NameValuePair> post = new ArrayList<NameValuePair>();
-        post.add(new BasicNameValuePair("username", username));
-        post.add(new BasicNameValuePair("password", password));
 
         // 연결 HttpClient 객체 생성
         HttpClient client = new DefaultHttpClient();
@@ -81,14 +71,14 @@ public class SendPost extends AsyncTask<Object, Object, JSONObject> {
         HttpConnectionParams.setSoTimeout(params, 5000);
 
         // Post객체 생성
-        HttpPost httpPost = new HttpPost("http://kafuuchino.moe:8282/users/login/");
+        HttpGet httpGet = new HttpGet("http://kafuuchino.moe:8282/users/whoami/");
+        httpGet.addHeader("Authorization", "Token "+token);
+        httpGet.addHeader("Content-Type", "application/json; charset=UTF-8");
         JSONObject json = null;
 
         try {
-            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(post, "UTF-8");
-            httpPost.setEntity(entity);
-            HttpResponse response = client.execute(httpPost);
-            String str = EntityUtils.toString(response.getEntity());
+            HttpResponse response = client.execute(httpGet);
+            String str = EntityUtils.toString(response.getEntity(), "UTF-8");
             json = new JSONObject(str);
         } catch (ClientProtocolException e) {
             e.printStackTrace();

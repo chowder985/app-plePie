@@ -1,6 +1,5 @@
 package com.appliepi.android.appplepie;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -25,15 +24,19 @@ import java.util.ArrayList;
  * Created by ilhoon on 27/02/2017.
  */
 
-public class SendPost extends AsyncTask<Object, Object, JSONObject> {
+public class SignupSendPost extends AsyncTask<Object, Object, JSONObject> {
 
-    private String username;
+    private String number;
+    private String name;
+    private String id;
     private String password;
-    private String token="Token";
-    private boolean loggined = false;
+    private boolean signupped = false;
+    private String token = "Token";
 
-    public SendPost(String username, String password){
-        this.username = username;
+    public SignupSendPost(String number, String name, String id, String password){
+        this.number = number;
+        this.name = name;
+        this.id = id;
         this.password = password;
     }
 
@@ -47,30 +50,32 @@ public class SendPost extends AsyncTask<Object, Object, JSONObject> {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                loggined = true;
+                signupped = true;
             }else{
-                loggined = false;
+                signupped = false;
             }
         }
 
         Log.d("Token", token);
 
-        if (loggined)
-            LoginActivity.getInstance().onLoginSuccess(token);
+        if (signupped)
+            SignupActivity.getInstance().onSignupSuccess(token);
         else
-            LoginActivity.getInstance().onLoginFailed();
+            SignupActivity.getInstance().onSignUpFailed();
     }
 
     @Override
-    protected JSONObject doInBackground(Object... voids) {
+    protected JSONObject doInBackground(Object... objects) {
         JSONObject content = executeClient();
         return content;
     }
 
     public JSONObject executeClient() {
         ArrayList<NameValuePair> post = new ArrayList<NameValuePair>();
-        post.add(new BasicNameValuePair("username", username));
+        post.add(new BasicNameValuePair("username", id));
         post.add(new BasicNameValuePair("password", password));
+        post.add(new BasicNameValuePair("student_id", number));
+        post.add(new BasicNameValuePair("nick_name", name));
 
         // 연결 HttpClient 객체 생성
         HttpClient client = new DefaultHttpClient();
@@ -81,7 +86,7 @@ public class SendPost extends AsyncTask<Object, Object, JSONObject> {
         HttpConnectionParams.setSoTimeout(params, 5000);
 
         // Post객체 생성
-        HttpPost httpPost = new HttpPost("http://kafuuchino.moe:8282/users/login/");
+        HttpPost httpPost = new HttpPost("http://kafuuchino.moe:8282/users/");
         JSONObject json = null;
 
         try {

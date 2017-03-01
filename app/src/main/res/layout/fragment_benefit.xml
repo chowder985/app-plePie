@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="10dp"
+              android:layout_marginTop="67dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+                tools:context="com.appliepi.android.appplepie.MainFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="ADVANTAGES"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="애플파이 동아리실"/>
+
+    <TextView
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="IT관 모바일 앱 개발실
+공식 명칭은 IT관 모바일 앱 개발실이며 기업실이라고도 부른다.
+체육관쪽 계단과 가장 가까이에 위치해 있다."/>
+
+</LinearLayout>

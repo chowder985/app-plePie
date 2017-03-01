@@ -1,10 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:layout_marginBottom="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:padding="10dp"
+              android:layout_marginTop="67dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:layout_marginBottom="10dp"
+              android:background="@color/white"
              tools:context="com.appliepi.android.appplepie.PerformanceFragment">
 
     <TextView
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceLarge"
@@ -13,4 +27,139 @@
         android:layout_centerVertical="true"
         />
 
-</RelativeLayout>
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="2012-2013"/>
+
+    <TextView
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="
+교내 모바일 저작권 앱 개발 대회 금상\n
+교내 모바일 저작권 앱 개발 대회 은상\n
+교내 모바일 저작권 앱 개발 대회 동상(2)\n
+교내 모바일 저작권 앱 개발 대회 장려상(2)\n
+교내 디지털 콘텐츠 경진대회 동상(3)\n
+교외 Google HackFair 입상\n
+교외 코리아 Wi.콘텐츠 콘테스트 KWC 동상\n
+교외 코리아 Wi.콘텐츠 콘테스트 KWC 장려상\n
+교외 SK플래닛 제9회 AppJam 1위\n
+교외 SK플래닛 제9회 AppJam 3위\n
+교외 SK플래닛 특성화고 앱개발 경진대회 본선진출(2)\n
+교외 마이크로소프트 이메진컵 본선진출\n"
+        />
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="2014"/>
+
+    <TextView
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="
+교내 디지털 콘텐츠 경진대회 웹부문 대상\n
+교내 디지털 콘텐츠 경진대회 웹부문 금상\n
+교내 모바일 콘텐츠 경진대회 웹부문 은상\n
+교내 모바일 콘텐츠 경진대회 웹부문 동상(2)\n
+교내 모바일 콘텐츠 경진대회 앱부문 금상\n
+교내 모바일 콘텐츠 경진대회 앱부문 은상\n
+교내 디지털 콘텐츠 경진대회 응용SW부문 금상\n
+교내 디지털 콘텐츠 경진대회 응용SW부문 은상\n
+교내 디지털 콘텐츠 경진대회 응용SW부문 동상(3)\n
+교내 디지털 콘텐츠 경진대회 멀티미디어부문 대상\n
+교내 디지털 콘텐츠 경진대회 멀티미디어부문 동상\n
+교외 환경 정보 활용 아이디어 에코톤 우수상\n
+교외 환경 정보 활용 창업대회 우수상\n
+교외 Smarteen App Challenge 대상\n
+교외 Smarteen App Challenge 장려상\n
+교외 삼성전자 투모로우 솔루션 우수상\n"
+        />
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="2015"/>
+
+    <TextView
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="
+교내 디지털 콘텐츠 경진대회 대상(2)\n
+교내 디지털 콘텐츠 경진대회 금상(2)\n
+교내 디지털 콘텐츠 경진대회 은상(1)\n
+교내 제1회 선린 해커톤대회 은상\n
+교내 제1회 선린 해커톤대회 동상\n
+교외 2015 삼성 투모로우솔루션 최우수상\n
+교외 안전데이터 활용 창업아이디어 해커톤 대상\n
+교외 제1회 SW 융합 해커톤 특별상\n
+교외 제2회 SW 융합 해커톤 대상\n
+교외 SK플래닛 제8회 AppJam 금상\n
+교외 SK플래닛 제8회 AppJam 은상\n
+교외 SK플래닛 제8회 AppJam 동상\n
+교외 SK플래닛 제9회 AppJam 최우수상\n
+교외 SK플래닛 제9회 AppJam 장려상\n
+교외 SK플래닛 제9회 AppJam 특별상\n
+교외 SK플래닛 Smarteen App Challenge 2015 우수상\n
+교외 한국정보올림피아드 공모부문 은상\n
+교외 KBC 바른말 UCC 공모전 3등\n
+교외 산업통상자원부 공공데이터 활용 비즈니스 아이디어 공모전 우수상\n"
+        />
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="2016"/>
+
+    <TextView
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="
+교내 모바일 콘텐츠 경진대회 생활부문 대상\n
+교내 모바일 콘텐츠 경진대회 생활부문 은상\n
+교내 모바일 콘텐츠 경진대회 게임부문 동상\n
+교내 디지털 미디어 콘텐츠 경진대회 웹콘텐츠분야 대상\n
+교내 디지털 미디어 콘텐츠 경진대회 웹콘텐츠분야 금상\n
+교내 디지털 미디어 콘텐츠 경진대회 웹콘텐츠분야 은상\n
+교내 디지털 미디어 콘텐츠 경진대회 웹콘텐츠분야 동상(2)\n
+교내 디지털 미디어 콘텐츠 경진대회 응용S/W콘텐츠분야 동상\n
+교내 디지털 미디어 콘텐츠 경진대회 영상부문 금상\n
+교내 디지털 미디어 콘텐츠 경진대회 영상부문 동상\n
+교내 제2회 선린 해커톤 동상\n
+교내 제2회 선린 해커톤 특별상\n
+교내 영상공모전 금상(2)\n
+교내 영상공모전 은상\n
+교내 그래픽 디자인 공모전 대상\n
+교내 그래픽 디자인 공모전 동상(2)\n
+교내 창의 아이디어 경진대회 동상\n
+교내 프로그래밍 경진대회 장려상\n
+교내 IOT아이디어 공모전 동상\n
+교내 정보올림피아드 동상\n
+교내 축제포스터 공모전 장려상\n
+교외 제4회 CI공모전 우수상\n
+교외 제14회 전국 SW 임베디드 대회 임베디드협회장상\n
+교외 한국정보올림피아드 동상(2)\n
+교외 Smarteen App Challenge 가작상\n
+교외 SK플래닛 제11회 AppJam 생활정보부문 금상\n
+교외 서울정보올림피아드 은상\n\n\n\n"
+        />
+
+</LinearLayout>
+</ScrollView>

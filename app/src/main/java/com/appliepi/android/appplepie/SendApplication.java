@@ -1,6 +1,5 @@
 package com.appliepi.android.appplepie;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -9,6 +8,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -25,52 +25,44 @@ import java.util.ArrayList;
  * Created by ilhoon on 27/02/2017.
  */
 
-public class SendPost extends AsyncTask<Object, Object, JSONObject> {
+public class SendApplication extends AsyncTask<Object, Object, JSONObject> {
 
-    private String username;
-    private String password;
-    private String token="Token";
-    private boolean loggined = false;
+    private String phoneNum;
+    private String intro;
+    private String motive;
+    private String target;
+    private String last;
+    private String token;
 
-    public SendPost(String username, String password){
-        this.username = username;
-        this.password = password;
+    public SendApplication(String token, String phoneNum, String intro, String motive, String target, String last){
+        this.token = token;
+        this.phoneNum = phoneNum;
+        this.intro = intro;
+        this.motive = motive;
+        this.target = target;
+        this.last = last;
     }
 
-    protected void onPostExecute(JSONObject result) {
-        // 모두 작업을 마치고 실행할 일 (메소드 등등)
+    protected void onPostExecute(JSONObject result){ //사실상 get
         super.onPostExecute(result);
-        if(result != null){
-            if(result.has("token")){
-                try {
-                    token = result.getString("token");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                loggined = true;
-            }else{
-                loggined = false;
-            }
-        }
+        Log.d("result", result.toString());
 
-        Log.d("Token", token);
-
-        if (loggined)
-            LoginActivity.getInstance().onLoginSuccess(token);
-        else
-            LoginActivity.getInstance().onLoginFailed();
+        MainActivity.getInstance().runGetUserInfo();
     }
 
     @Override
-    protected JSONObject doInBackground(Object... voids) {
+    protected JSONObject doInBackground(Object... objects) {
         JSONObject content = executeClient();
         return content;
     }
 
     public JSONObject executeClient() {
         ArrayList<NameValuePair> post = new ArrayList<NameValuePair>();
-        post.add(new BasicNameValuePair("username", username));
-        post.add(new BasicNameValuePair("password", password));
+        post.add(new BasicNameValuePair("number", phoneNum));
+        post.add(new BasicNameValuePair("about_me", intro));
+        post.add(new BasicNameValuePair("reason_for_application", motive));
+        post.add(new BasicNameValuePair("future_goal", target));
+        post.add(new BasicNameValuePair("determination", last));
 
         // 연결 HttpClient 객체 생성
         HttpClient client = new DefaultHttpClient();
@@ -81,7 +73,8 @@ public class SendPost extends AsyncTask<Object, Object, JSONObject> {
         HttpConnectionParams.setSoTimeout(params, 5000);
 
         // Post객체 생성
-        HttpPost httpPost = new HttpPost("http://kafuuchino.moe:8282/users/login/");
+        HttpPost httpPost = new HttpPost("http://kafuuchino.moe:8282/applications/");
+        httpPost.addHeader("Authorization", "Token "+token);
         JSONObject json = null;
 
         try {
@@ -99,4 +92,5 @@ public class SendPost extends AsyncTask<Object, Object, JSONObject> {
         }
         return json;
     }
+
 }

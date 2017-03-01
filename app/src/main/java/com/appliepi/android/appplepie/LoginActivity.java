@@ -37,13 +37,10 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
+    static LoginActivity sLoginActivity;
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    private int loggined = -1;
-    private String tokenForUser;
-    private String urlParameters;
 
-    AQuery aq = new AQuery(this);
     EditText nameInput;
     EditText passwordInput;
     Button loginBtn;
@@ -53,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sLoginActivity = this;
 
         nameInput = (EditText) findViewById(R.id.input_name);
         passwordInput = (EditText) findViewById(R.id.input_password);
@@ -91,24 +89,17 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("로그인 중...");
         progressDialog.show();
 
-        String name = nameInput.getText().toString();
-        String password = passwordInput.getText().toString();
-
-        SendPost sendPost = (SendPost) new SendPost(name, password).execute();
-        tokenForUser = sendPost.getToken();
-
-
+        final String name = nameInput.getText().toString();
+        final String password = passwordInput.getText().toString();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        if (loggined == 1)
-                            onLoginSuccess();
-                        else
-                            onLoginFailed();
+                        new SendPost(name, password).execute();
+
                         progressDialog.dismiss();
                     }
-                }, 2000);
+                }, 3000);
         /*boolean authentication = false;
         if(name.equals("michael985")){
             if(password.equals("1234")){
@@ -129,6 +120,10 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
+
+                String token = data.getStringExtra("TokenFromSignup");
+                Log.d(TAG, token);
+                onLoginSuccess(token);
             }
         }
     }
@@ -168,13 +163,17 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setEnabled(true);
     }
 
-    public void onLoginSuccess() {
+    public void onLoginSuccess(String tokenForUser) {
         loginBtn.setEnabled(true);
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("token", tokenForUser);
         startActivity(intent);
         finish();
+    }
+
+    public static LoginActivity getInstance(){
+        return sLoginActivity;
     }
 
 }
